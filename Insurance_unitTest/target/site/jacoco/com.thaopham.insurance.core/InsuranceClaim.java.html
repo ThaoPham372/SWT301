@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InsuranceClaim.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Insurance_unitTest</a> &gt; <a href="index.source.html" class="el_package">com.thaopham.insurance.core</a> &gt; <span class="el_source">InsuranceClaim.java</span></div><h1>InsuranceClaim.java</h1><pre class="source lang-java linenums">package com.thaopham.insurance.core;
+
+public class InsuranceClaim {
+
+    private String claimId;
+    private double amount;
+    private String claimStatus;
+
+    private static final double PAYOUT_RATE = 0.85;
+
+    /**
+     * Constructor to initialize the insurance claim.
+     *
+     * @param id Claim ID
+     * @param claimAmount Amount claimed
+     * @throws IllegalArgumentException if amount is zero or negative
+     */
+<span class="fc" id="L18">    public InsuranceClaim(String id, double claimAmount) {</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (claimAmount &lt;= 0) {</span>
+<span class="fc" id="L20">            throw new IllegalArgumentException(&quot;Claim amount must be positive.&quot;);</span>
+        }
+<span class="fc" id="L22">        this.claimId = id;</span>
+<span class="fc" id="L23">        this.amount = claimAmount;</span>
+<span class="fc" id="L24">        this.claimStatus = &quot;Pending&quot;;</span>
+<span class="fc" id="L25">    }</span>
+
+    /**
+     * Processes the claim by updating its status if currently pending.
+     *
+     * @param statusUpdate New status to apply
+     * @return true if update was applied, false otherwise
+     */
+    public boolean processClaim(String statusUpdate) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (&quot;Pending&quot;.equals(this.claimStatus)) {</span>
+<span class="fc" id="L35">            this.claimStatus = statusUpdate;</span>
+<span class="fc" id="L36">            return true;</span>
+        }
+<span class="fc" id="L38">        return false;</span>
+    }
+
+    /**
+     * Calculates payout based on approval.
+     *
+     * @return payout amount or 0 if not approved
+     */
+    public double calculatePayout() {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (&quot;Approved&quot;.equals(this.claimStatus)) {</span>
+<span class="fc" id="L48">            return amount * PAYOUT_RATE;</span>
+        } else {
+<span class="fc" id="L50">            return 0;</span>
+        }
+    }
+
+    /**
+     * Updates the amount of the claim.
+     *
+     * @param newAmount new claim amount
+     */
+    public void updateClaimAmount(double newAmount) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (newAmount &lt;= 0) {</span>
+<span class="fc" id="L61">            throw new IllegalArgumentException(&quot;New amount must be positive.&quot;);</span>
+        }
+<span class="fc" id="L63">        this.amount = newAmount;</span>
+<span class="fc" id="L64">    }</span>
+
+    // Getters
+    public String getClaimId() {
+<span class="fc" id="L68">        return claimId;</span>
+    }
+
+    public double getAmount() {
+<span class="fc" id="L72">        return amount;</span>
+    }
+
+    public String getClaimStatus() {
+<span class="fc" id="L76">        return claimStatus;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L81">        return &quot;InsuranceClaim{&quot;</span>
+                + &quot;claimId='&quot; + claimId + '\''
+                + &quot;, amount=&quot; + amount
+                + &quot;, claimStatus='&quot; + claimStatus + '\''
+                + '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
