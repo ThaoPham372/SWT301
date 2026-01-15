@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MathUtils</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.mathutil.core</a> &gt; <span class="el_source">AccountService.java</span></div><h1>AccountService.java</h1><pre class="source lang-java linenums">package com.mycompany.mathutil.core;
+
+import java.util.Objects;
+import java.util.regex.Pattern;
+
+/**
+ * Service đơn giản mô phỏng chức năng đăng ký tài khoản.
+ *
+ * Yêu cầu từ lab:
+ * - password phải lớn hơn 6 ký tự
+ * - email hợp lệ
+ * - username không được rỗng
+ */
+<span class="fc" id="L14">public class AccountService {</span>
+
+    // Regex đơn giản kiểm tra định dạng email hợp lệ ở mức cơ bản
+<span class="fc" id="L17">    private static final Pattern EMAIL_PATTERN =</span>
+<span class="fc" id="L18">            Pattern.compile(&quot;^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$&quot;);</span>
+
+    /**
+     * Đăng ký tài khoản.
+     *
+     * @param username tên đăng nhập
+     * @param password mật khẩu
+     * @param email    địa chỉ email
+     * @return true nếu dữ liệu hợp lệ theo rule của bài lab, ngược lại false
+     */
+    public boolean registerAccount(String username, String password, String email) {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (!isValidUsername(username)) {</span>
+<span class="fc" id="L30">            return false;</span>
+        }
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (!isValidPassword(password)) {</span>
+<span class="fc" id="L33">            return false;</span>
+        }
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (!isValidEmail(email)) {</span>
+<span class="fc" id="L36">            return false;</span>
+        }
+        // Ở đây giả sử luôn đăng ký thành công nếu dữ liệu hợp lệ
+        // (không kết nối DB hay lưu trạng thái thật)
+<span class="fc" id="L40">        return true;</span>
+    }
+
+    private boolean isValidUsername(String username) {
+<span class="fc bfc" id="L44" title="All 4 branches covered.">        return username != null &amp;&amp; !username.trim().isEmpty();</span>
+    }
+
+    public boolean isValidPassword(String password) {
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">        return password != null &amp;&amp; password.length() &gt; 6;</span>
+    }
+
+    public boolean isValidEmail(String email) {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (Objects.isNull(email)) {</span>
+<span class="fc" id="L53">            return false;</span>
+        }
+<span class="fc" id="L55">        return EMAIL_PATTERN.matcher(email).matches();</span>
+    }
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
